@@ -5,24 +5,27 @@ import java.util.Scanner;
 
 public class CheckMethods {
     public static void main(String[] args) {
-        int key = 1;
-        Scanner scanner = new Scanner(System.in);
+        int key;
+        boolean reading = true;
 
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Введите любое число от 1 до 5. Чтобы выйти из программы введите 0!");
 
-        while (key != 0) {
+        // если не использовать флаг, а просто true, тогда стр.23 становится ошибкой (т.е. не могу закрыть scanner)
+        while (reading) {
             try {
                 key = scanner.nextInt();
-                checkMethod(key);
-            } catch (InputMismatchException err) {
-                System.out.println("Необходимо ввести число от 1 до 5 или 0 для выхода из программы!");
+                runningMethodByNumber(key);
+            } catch (InputMismatchException e) {
+                // Если я ввожу символ отличный от числа, я вхожу в бесконечный цикл. Как это исправить?
+                System.err.println("Необходимо ввести число! " + e.getMessage());
             }
         }
         scanner.close();
     }
 
-    private static void checkMethod(int numMethod) {
-        switch (numMethod) {
+    private static void runningMethodByNumber(int numOfMethod) {
+        switch (numOfMethod) {
             case 1:
                 greetings();
                 break;
@@ -37,6 +40,7 @@ public class CheckMethods {
                 break;
             case 5:
                 addOrSubtractAndPrint(2, 3, false);
+                break;
             default:
                 System.out.println("Введенное число не соответствует диапазону от 1 до 5!");
         }
