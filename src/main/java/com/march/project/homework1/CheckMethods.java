@@ -1,12 +1,45 @@
 package com.march.project.homework1;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class CheckMethods {
     public static void main(String[] args) {
-        greetings();
-        checkSign(1, 2, -3);
-        selectColor(5);
-        compareNumbers(3, 5);
-        addOrSubtractAndPrint(2, 3, false);
+        int key = 1;
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Введите любое число от 1 до 5. Чтобы выйти из программы введите 0!");
+
+        while (key != 0) {
+            try {
+                key = scanner.nextInt();
+                checkMethod(key);
+            } catch (InputMismatchException err) {
+                System.out.println("Необходимо ввести число от 1 до 5 или 0 для выхода из программы!");
+            }
+        }
+        scanner.close();
+    }
+
+    private static void checkMethod(int numMethod) {
+        switch (numMethod) {
+            case 1:
+                greetings();
+                break;
+            case 2:
+                checkSign(1, 2, -3);
+                break;
+            case 3:
+                selectColor(5);
+                break;
+            case 4:
+                compareNumbers(3, 5);
+                break;
+            case 5:
+                addOrSubtractAndPrint(2, 3, false);
+            default:
+                System.out.println("Введенное число не соответствует диапазону от 1 до 5!");
+        }
     }
 
     private static void greetings() {
