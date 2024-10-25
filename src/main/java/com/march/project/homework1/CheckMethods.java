@@ -5,20 +5,18 @@ import java.util.Scanner;
 
 public class CheckMethods {
     public static void main(String[] args) {
-        int key;
-        boolean reading = true;
+        int key = 1;
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите любое число от 1 до 5. Чтобы выйти из программы введите 0!");
 
-        // если не использовать флаг, а просто true, тогда стр.23 становится ошибкой (т.е. не могу закрыть scanner)
-        while (reading) {
+        while (key != 0) {
             try {
                 key = scanner.nextInt();
                 runningMethodByNumber(key);
             } catch (InputMismatchException e) {
-                // Если я ввожу символ отличный от числа, я вхожу в бесконечный цикл. Как это исправить?
                 System.err.println("Необходимо ввести число! " + e.getMessage());
+                scanner.nextLine();
             }
         }
         scanner.close();
