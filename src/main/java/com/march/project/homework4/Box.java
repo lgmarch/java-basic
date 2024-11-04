@@ -21,6 +21,14 @@ public class Box {
         this.numberOfItems = 0;         // изначально коробка пустая
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     public void openBox() {
         this.isOpen = true;
         System.out.println("Коробка открыта.");
