@@ -8,37 +8,51 @@ public abstract class Animals {
     boolean isEndurance;
 
     public void run(int distance) {
+        int distanceCovered = endurance - distance;
+        float timeSpent = distance / runningSpeed;
+
+        printStateOfAnimal(distanceCovered, timeSpent);
+    }
+
+    public void swim(int distance) {
+        int distanceCovered = endurance - distance;
+        float timeSpent = distance / swimmingSpeed;
+
+        printStateOfAnimal(distanceCovered, timeSpent);
+    }
+
+    public void animalResting (int endurance) {
+        this.endurance += endurance;
+        this.isEndurance = false;
+    }
+
+    private void printStateOfAnimal(int distance, float time) {
         // нет сил для забега
         if (isEndurance) {
             System.out.println(name + " еще не отдохнула с прошлого забега! Где зеленые? Здесь издеваются над животными!");
             return;
         }
 
-        int distanceCovered = endurance - distance;
-        float timeSpent = distance / runningSpeed;
-
         // преодолел часть дистанции
-        if (distanceCovered < 0) {
+        if (distance < 0) {
+            printDistanceCovered(endurance, time);
+            System.out.println(" " + name + " без сил. И не может пробежать еще " + Math.abs(distance) + " км.");
+
             isEndurance = true;
             endurance = -1;
-
-            printDistanceCovered(distanceCovered + distance, timeSpent);
-            System.out.println(" " + name + " без сил. И не может пробежать еще " + Math.abs(distanceCovered) + " км.");
             return;
         }
 
         // финиширует
-        printDistanceCovered(distance, timeSpent);
-        endurance = distanceCovered;
+        printDistanceCovered(endurance, time);
+        endurance = distance;
         System.out.println(" " + name + " финиширует! Осталось сил: " + endurance);
 
         // но на следующий забег нет сил
-        if (distanceCovered == 0) {
+        if (distance == 0) {
             isEndurance = true;
         }
     }
-
-    public abstract void swim(int distance);
 
     private void printDistanceCovered(int distance, float time) {
         System.out.print(name + "\t" + " Время: " + time + " \t" + name + "\t");
