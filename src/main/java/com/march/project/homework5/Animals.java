@@ -1,40 +1,57 @@
 package com.march.project.homework5;
 
-public class Animals {
+public abstract class Animals {
     String name;
     float runningSpeed;
     float swimmingSpeed;
     int endurance;
+    boolean isEndurance;
 
     public void run(int distance) {
-        if (endurance <= 0) {
-            System.out.println(name + " еще не отдохнул с прошлого забега! Где зеленые? Издевательство над животными!");
+        // нет сил для забега
+        if (isEndurance) {
+            System.out.println(name + " еще не отдохнула с прошлого забега! Где зеленые? Здесь издеваются над животными!");
             return;
         }
 
         int distanceCovered = endurance - distance;
         float timeSpent = distance / runningSpeed;
 
+        // преодолел часть дистанции
         if (distanceCovered < 0) {
-            printDistanceCovered(endurance, timeSpent);
-            System.out.println(" упала без сил. И не смогла пробежать еще " + Math.abs(distanceCovered) + " км.");
+            isEndurance = true;
             endurance = -1;
+
+            printDistanceCovered(distanceCovered + distance, timeSpent);
+            System.out.println(" " + name + " без сил. И не может пробежать еще " + Math.abs(distanceCovered) + " км.");
             return;
         }
 
+        // финиширует
         printDistanceCovered(distance, timeSpent);
         endurance = distanceCovered;
         System.out.println(" " + name + " финиширует! Осталось сил: " + endurance);
-    }
 
-    private void printDistanceCovered(int distance, float time) {
-        System.out.print("\t" + name + " скорость: " + time + " \r");
-        for (int i = 0; i < distance; i++) {
-            System.out.print("=");
+        // но на следующий забег нет сил
+        if (distanceCovered == 0) {
+            isEndurance = true;
         }
     }
 
+    public abstract void swim(int distance);
+
+    private void printDistanceCovered(int distance, float time) {
+        System.out.print(name + "\t" + " Время: " + time + " \t" + name + "\t");
+
+        for (int i = 0; i < distance; i++) {
+            System.out.print("=");
+        }
+
+    }
+
     public String info() {
-        return name + ", cил: " + endurance;
+        String str = isEndurance ? "Нет сил" : "Полон сил";
+
+        return name + ", cил: " + endurance + ", " + str;
     }
 }
