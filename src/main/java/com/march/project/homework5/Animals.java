@@ -4,6 +4,7 @@ public abstract class Animals {
     String name;
     float runningSpeed;
     float swimmingSpeed;
+    int powerRequirements;
     int endurance;
     boolean isEndurance;
 
@@ -15,7 +16,7 @@ public abstract class Animals {
     }
 
     public void swim(int distance) {
-        int distanceCovered = endurance - distance;
+        int distanceCovered = endurance - distance * powerRequirements;
         float timeSpent = distance / swimmingSpeed;
 
         printStateOfAnimal(distanceCovered, timeSpent);
