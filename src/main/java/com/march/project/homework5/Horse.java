@@ -1,4 +1,4 @@
-package com.march.project.homework4;
+package com.march.project.homework5;
 
 public class Horse extends Animals {
     public Horse(String name) {
