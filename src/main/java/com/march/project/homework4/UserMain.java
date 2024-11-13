@@ -5,10 +5,10 @@ import java.util.*;
 
 public class UserMain {
     public static void main(String[] args) {
-        User[] userArray = new User[10];
         Year yearOfBirth = Year.of(1984);
 
-        fillUserArray(userArray);
+        int numOfUser = 10;
+        User[] userArray = generateUserArray(numOfUser);
         printUsers(userArray);
 
         System.out.println("-------");
@@ -29,8 +29,10 @@ public class UserMain {
         System.out.println(box);
     }
 
-    private static void fillUserArray(User[] users) {
-        for(int i=1; i <= users.length; i++) {
+    private static User[] generateUserArray(int count) {
+        User[] users = new User[count];
+
+        for(int i=0; i < users.length; i++) {
             String firstName = "Ivanov" + i;
             String lastName = "Ivan" + i;
             String patronymic = "Jovanovich" + i;
@@ -38,9 +40,9 @@ public class UserMain {
             Year year = Year.of(yearRandom);
             String email = "ivanov" + i + "@gmail.com";
 
-            User user = new User(firstName, lastName, patronymic, year, email);
-            users[i] = user;
+            users[i] = new User(firstName, lastName, patronymic, year, email);
         }
+        return users;
     }
 
     private static User[] usersOlderSpecifiedAge(User[] users, int year) {
