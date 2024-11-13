@@ -1,37 +1,41 @@
 package com.march.project.homework4;
 
-import java.util.Calendar;
+import java.time.Year;
 
 public class User {
     private String firstName;
     private String lastName;
     private String patronymic;
-    private Calendar dateOfBirth;
+    private Year yearOfBirth;
     private String email;
 
-    public User(String firstName, String lastName, String patronymic, Calendar dateOfBirth, String email) {
+    public User(String firstName, String lastName, String patronymic, Year year, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymic = patronymic;
-        this.dateOfBirth = dateOfBirth;
+        this.yearOfBirth = year;
         this.email = email;
     }
 
     public int getYearOfBirth() {
-        return dateOfBirth.get(Calendar.YEAR);
+        return yearOfBirth.getValue();
     }
 
     public void setYearOfBirth(int year) throws Exception {
-        if (year < 0 || year > 200) {
+        Year yearNow = Year.now();
+        Year yearOfBirth = Year.of(year);
+        Year yearMin = Year.of(1900);
+
+        if (yearNow.compareTo(yearOfBirth) < 0 || yearOfBirth.compareTo(yearMin) < 0) {
             throw new Exception("Введена не корректная дата года рождения: " + year);
         }
-        this.dateOfBirth.set(Calendar.YEAR, year);
+        this.yearOfBirth = Year.of(year);
     }
 
     @Override
     public String toString() {
         return "ФИО: " + firstName + " " + lastName + " " + patronymic + "\n" +
-                "Дата рождения: " + dateOfBirth.getTime() + "\n" +
+                "Дата рождения: " + yearOfBirth.getValue() + "\n" +
                 "email: " + email + "\n";
     }
 }

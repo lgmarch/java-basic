@@ -1,44 +1,44 @@
 package com.march.project.homework4;
 
+import java.time.Year;
 import java.util.*;
 
 public class UserMain {
     public static void main(String[] args) {
         User[] userArray = new User[10];
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(Calendar.YEAR, 1984);
+        Year yearOfBirth = Year.of(1984);
 
         fillUserArray(userArray);
         printUsers(userArray);
 
         System.out.println("-------");
 
-        User[] olderUsers = usersOlderSpecifiedAge(userArray, calendar.get(Calendar.YEAR));
+        User[] olderUsers = usersOlderSpecifiedAge(userArray, yearOfBirth.getValue());
         printUsers(olderUsers);
 
         /* Box */
         Box box = new Box(23, 34, 23, "red", 3);
-        box.openBox();
+        box.open();
         box.getItem();
         box.setItem();
         box.setItem();
         box.setItem();
         box.setItem();
         box.getNumberOfItems();
-        box.closeBox();
+        box.close();
         System.out.println(box);
     }
 
     private static void fillUserArray(User[] users) {
-        for(int i=0; i < users.length; i++) {
+        for(int i=1; i <= users.length; i++) {
             String firstName = "Ivanov" + i;
             String lastName = "Ivan" + i;
             String patronymic = "Jovanovich" + i;
-            int year = 2024 - getRandomNumber(80);
-            Calendar date = new GregorianCalendar(year, i , 25);
+            int yearRandom = 2024 - getRandomNumber(80);
+            Year year = Year.of(yearRandom);
             String email = "ivanov" + i + "@gmail.com";
 
-            User user = new User(firstName, lastName, patronymic, date, email);
+            User user = new User(firstName, lastName, patronymic, year, email);
             users[i] = user;
         }
     }

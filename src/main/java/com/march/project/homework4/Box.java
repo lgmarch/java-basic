@@ -1,14 +1,12 @@
 package com.march.project.homework4;
 
-import org.w3c.dom.ls.LSOutput;
-
 public class Box {
     private final int width;
     private final int height;
     private final int depth;
     private String color;
     private boolean isOpen;
-    private int boxCapacity;
+    private final int boxCapacity;
     private int numberOfItems;
 
     public Box(int width, int height, int depth, String color, int boxCapacity) {
@@ -29,12 +27,12 @@ public class Box {
         this.color = color;
     }
 
-    public void openBox() {
+    public void open() {
         this.isOpen = true;
         System.out.println("Коробка открыта.");
     }
 
-    public void closeBox() {
+    public void close() {
         this.isOpen = false;
         System.out.println("Коробка закрыта.");
     }
@@ -66,7 +64,7 @@ public class Box {
     }
 
     public void getNumberOfItems() {
-        System.out.println("В коробке " + numberOfItems + " предметов.");;
+        System.out.println("В коробке " + numberOfItems + " предметов.");
     }
 
     @Override
