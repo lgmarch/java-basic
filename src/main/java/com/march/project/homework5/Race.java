@@ -1,19 +1,24 @@
 package com.march.project.homework5;
 
-public class Zoo {
+import com.march.project.homework5.animals.Animal;
+import com.march.project.homework5.animals.Cat;
+import com.march.project.homework5.animals.Dog;
+import com.march.project.homework5.animals.Horse;
+
+public class Race {
     public static void main(String[] args) {
-        Animals[] zoo = {new Cat("Murky"), new Dog("Dominic"), new Horse("Star")};
+        Animal[] zoo = {new Cat("Murky"), new Dog("Dominic"), new Horse("Star")};
 
         printZoo(zoo);
 
-        int distance = 10;
+        int distance = 20;
 
         // running
         System.out.println();
         System.out.println("*** Бег. Дистанция " + distance + " километров! ***");
         System.out.println("На старт! Внимание! Марш!");
-        for (Animals animals : zoo) {
-            animals.run(distance);
+        for (Animal animal : zoo) {
+            animal.run(distance);
         }
         System.out.println("*** Финиш! ***");
         System.out.println();
@@ -24,8 +29,8 @@ public class Zoo {
         // resting
         System.out.println();
         System.out.println("*** Relax! ***");
-        for (Animals animal : zoo) {
-            animal.animalResting(20);
+        for (Animal animal : zoo) {
+            animal.rest(20);
         }
         printZoo(zoo);
 
@@ -33,16 +38,16 @@ public class Zoo {
         System.out.println();
         System.out.println("*** Плавание. Дистанция " + distance + " километров! ***");
         System.out.println("На старт! Внимание! Марш!");
-        for (Animals animals : zoo) {
-            animals.swim(distance);
+        for (Animal animal : zoo) {
+            animal.swim(distance);
         }
         System.out.println("*** Финиш! ***");
         System.out.println();
         printZoo(zoo);
     }
 
-    public static void printZoo(Animals[] animals) {
-        for (Animals animal : animals) {
+    public static void printZoo(Animal[] animals) {
+        for (Animal animal : animals) {
             System.out.println(animal.info());
         }
     }
