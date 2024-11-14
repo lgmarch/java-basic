@@ -1,7 +1,9 @@
 package com.march.project.homework5.move;
 
-public class RunMovement implements Run {
-    public float run(int distance, float speed) {
-        return distance / speed;
+import com.march.project.homework5.animals.Animal;
+
+public class RunMovement extends Movement {
+    public float requiredForce(Animal animal, int distance) {
+        return distance;     // преодоленное растояние
     }
 }

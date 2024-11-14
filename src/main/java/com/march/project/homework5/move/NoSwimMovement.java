@@ -1,9 +1,16 @@
 package com.march.project.homework5.move;
 
-public class NoSwimMovement implements Swim {
+import com.march.project.homework5.animals.Animal;
 
-    public float swim(int distance, float speed) {
-        System.out.println("I can`t swim...");
+public class NoSwimMovement extends Movement {
+
+    public float requiredForce(Animal animal, int distance) {
         return -1L;
+    }
+
+    @Override
+    public int setState(Animal animal, float requiredForce) {
+        System.out.println(" " + animal.getName() + " I can`t swim...");
+        return 4;
     }
 }

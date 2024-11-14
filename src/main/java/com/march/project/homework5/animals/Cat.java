@@ -1,17 +1,21 @@
 package com.march.project.homework5.animals;
 
-import com.march.project.homework5.move.NoSwimMovement;
-import com.march.project.homework5.move.RunMovement;
+import com.march.project.homework5.move.Movement;
 
 public class Cat extends Animal {
     public Cat(String name) {
-        runMovement = new RunMovement();
-        swimMovement = new NoSwimMovement();
+        super(name);
+        catInit();
+    }
 
-        this.name = name;
-        this.runningSpeed = 5;
-        this.swimmingSpeed = 0;
-        this.endurance = 10;
-        this.isTired = false;
+    public Cat(String name, Movement movement) {
+        super(name, movement);
+        catInit();
+    }
+
+    private void catInit() {
+        this.runSpeed = 5;
+        this.swimSpeed = 2;
+        this.force = 10;
     }
 }

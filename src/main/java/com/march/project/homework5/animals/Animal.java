@@ -1,78 +1,64 @@
 package com.march.project.homework5.animals;
 
-import com.march.project.homework5.move.Run;
-import com.march.project.homework5.move.Swim;
+import com.march.project.homework5.move.Movement;
 
 public abstract class Animal {
-    Run runMovement;
-    Swim swimMovement;
+    Movement movement;
+
     String name;
-    float runningSpeed;
-    float swimmingSpeed;
+    float runSpeed;
+    float swimSpeed;
     int swimPowerRequirements;
-    int endurance;
-    boolean isTired;
+    float force;
 
-    public void run(int distance) {
-        int distanceCovered = endurance - distance;     // преодоленное растояние
-        float time = runMovement.run(distance, runningSpeed);
-        printDistanceCovered(distanceCovered, time);
-        determinationAnimalCondition(distanceCovered, time);
+    public Animal(String name) {
+        this.name = name;
     }
 
-    public void swim(int distance) {
-        int distanceCovered = endurance - distance * swimPowerRequirements;
-        float time = swimMovement.swim(distance, swimmingSpeed);
-        printDistanceCovered(distanceCovered, time);
-        determinationAnimalCondition(distanceCovered, time);
+    public Animal(String name, Movement movement) {
+        this.name = name;
+        this.movement = movement;
     }
 
-    public void rest(int endurance) {
-        this.endurance += endurance;
-        this.isTired = false;
+    public String getName() {
+        return name;
     }
 
-    private void determinationAnimalCondition(int distance, float time) {
-        // нет сил для забега
-        if (isTired || time == -1) {
-            System.out.println(name + " сошел с дистанции!");
-            return;
-        }
-
-        // преодолел часть дистанции (число отрицительное)
-        if (distance < 0) {
-            System.out.println(" " + name + " без сил. И не может преодолеть оставшиеся " + Math.abs(distance) + " км.");
-
-            isTired = true;
-            endurance = -1;
-            return;
-        }
-
-        // финиширует
-        endurance = distance;
-        System.out.println(" " + name + " финиширует! Осталось сил: " + endurance);
-
-        // но на следующий забег нет сил
-        if (distance == 0) {
-            isTired = true;
-            endurance = -1;
-        }
+    public int getSwimPowerRequirements() {
+        return swimPowerRequirements;
     }
 
-    private void printDistanceCovered(int distance, float time) {
-        if (time == -1) {
-            return;
-        }
-        System.out.print(name + "\t" + " Время: " + time + " \t" + name + "\t");
+    public float getForce() {
+        return force;
+    }
 
-        for (int i = 0; i < distance; i++) {
-            System.out.print("=");
-        }
+    public void setMovement(Movement movement) {
+        this.movement = movement;
+    }
+
+    public void setForce(float force) {
+        this.force = force;
+    }
+
+    public boolean isTired() {
+        return force == -1;
+    }
+
+    public float run(int distance) {
+        float requiredForce = movement.requiredForce(this, distance);
+        int state = movement.setState(this, requiredForce);
+        return state == 0 ? distance/runSpeed : 0;
+    }
+
+    public float swim(int distance) {
+        float requiredForce = movement.requiredForce(this, distance);
+        int state = movement.setState(this, requiredForce);
+        return state == 0 ? distance/swimSpeed : 0;
     }
 
     public String info() {
-        String str = isTired ? "Нет сил" : "Полон сил";
+        String str = isTired() ? "Нет сил" : "Полон сил";
 
-        return name + ", cил: " + endurance + ", \t" + str;
+        return name + ", cил: " + force + ", \t" + str;
     }
 }

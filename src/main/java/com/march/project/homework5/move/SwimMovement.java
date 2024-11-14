@@ -1,7 +1,9 @@
 package com.march.project.homework5.move;
 
-public class SwimMovement implements Swim {
-    public float swim(int distance, float speed) {
-        return distance / speed;
+import com.march.project.homework5.animals.Animal;
+
+public class SwimMovement extends Movement {
+    public float requiredForce(Animal animal, int distance) {
+        return distance * animal.getSwimPowerRequirements();
     }
 }

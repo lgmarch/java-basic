@@ -1,18 +1,22 @@
 package com.march.project.homework5.animals;
 
-import com.march.project.homework5.move.RunMovement;
-import com.march.project.homework5.move.SwimMovement;
+import com.march.project.homework5.move.Movement;
 
 public class Dog extends Animal {
     public Dog(String name) {
-        runMovement = new RunMovement();
-        swimMovement = new SwimMovement();
+        super(name);
+        dogInit();
+    }
 
-        this.name = name;
-        this.runningSpeed = 10;
-        this.swimmingSpeed = 5;
+    public Dog(String name, Movement movement) {
+        super(name, movement);
+        dogInit();
+    }
+
+    private void dogInit() {
+        this.runSpeed = 10;
+        this.swimSpeed = 5;
         this.swimPowerRequirements = 2;
-        this.endurance = 20;
-        this.isTired = false;
+        this.force = 20;
     }
 }
