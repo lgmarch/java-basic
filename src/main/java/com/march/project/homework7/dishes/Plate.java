@@ -1,41 +1,44 @@
 package com.march.project.homework7.dishes;
 
-public class Plate {
-    private final int maximumSize;  // емкость тарелки
-    private int currentAmountFood;  // количество еды в тарелке
-    
+public class Plate implements Dishes {
+    private final int maximumSize;  // емкость
+    private int currentFoodAmount;  // количество еды в данный момент
+
     public Plate(int maximumSize) {
         this.maximumSize = maximumSize;
-        this.currentAmountFood = 0; // при создании тарелка пустая
+        this.currentFoodAmount = 0; // при создании тарелка пустая
     }
 
-    public int getCurrentAmountFood() {
-        return currentAmountFood;
+    @Override
+    public int getCurrentFoodAmount() {
+        return currentFoodAmount;
     }
 
-    public boolean addingFood(int addedAmountFood) {
-        int resultFood = currentAmountFood + addedAmountFood;
+    @Override
+    public boolean addFood(int addedAmountFood) {
+        int resultFood = currentFoodAmount + Math.abs(addedAmountFood);
 
         if (resultFood > maximumSize) {
-            currentAmountFood = maximumSize;
+            currentFoodAmount = maximumSize;
             return false;
         }
-        this.currentAmountFood = resultFood;
+        this.currentFoodAmount = resultFood;
         return true;
     }
 
-    public void reducingFood(int reducedAmountFood) {
-        int resultFood = currentAmountFood - reducedAmountFood;
+    @Override
+    public void consumeFood(int reducedAmountFood) {
+        int resultFood = currentFoodAmount - Math.abs(reducedAmountFood);
 
         if (resultFood < 0) {
-            currentAmountFood = 0;
+            currentFoodAmount = 0;
             return;
         }
-        currentAmountFood = resultFood;
+        currentFoodAmount = resultFood;
     }
 
     @Override
     public String toString() {
-        return "В тарелке осталось " + currentAmountFood + " еды";
+        return "В тарелке осталось " + currentFoodAmount + " еды";
     }
 }

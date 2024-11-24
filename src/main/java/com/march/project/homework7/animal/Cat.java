@@ -1,6 +1,6 @@
 package com.march.project.homework7.animal;
 
-public class Cat implements Eating {
+public class Cat implements Eat {
     private final String name;
     private final int appetite;       // сколько еды может съесть
     private boolean satiety;    // сыт (true) или голоден (false)

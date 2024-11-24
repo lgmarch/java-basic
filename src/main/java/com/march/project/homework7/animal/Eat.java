@@ -1,5 +1,5 @@
 package com.march.project.homework7.animal;
 
-public interface Eating {
+public interface Eat {
     boolean eat(int foods);
 }
