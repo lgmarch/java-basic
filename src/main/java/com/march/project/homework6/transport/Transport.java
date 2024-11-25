@@ -13,6 +13,7 @@ public abstract class Transport {
 
     abstract boolean isCanGo(Area area);
     public abstract boolean run(Area area, int distance);
+    public abstract void setPetrol(float petrol);
 
     public Area getArea() {
         return area;

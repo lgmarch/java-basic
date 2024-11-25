@@ -16,9 +16,9 @@ public class Car extends Transport {
     boolean isCanGo(Area area) {
         if (!(area instanceof Plain)) {
             System.out.println("Машина не может двигаться по " + area);
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -27,16 +27,17 @@ public class Car extends Transport {
             System.out.println("Вы не выбрали куда ехать!");
             return false;
         }
-        if (!isCanGo(area)){
+        if (isCanGo(area)){
             return false;
         }
 
-        float spentGas = distance * gasConsumption; // расчет расхода бензина на поездку
+        float spentGas = Math.abs(distance) * gasConsumption; // расчет расхода бензина на поездку
         if (spentGas > petrol) {
             System.out.println("Не достаточно бензина!");
             return false;
         }
         petrol -= spentGas;
+        System.out.println("======");
         System.out.println("Приехали!");
         return true;
     }
@@ -45,8 +46,10 @@ public class Car extends Transport {
         return petrol;
     }
 
+    @Override
     public void setPetrol(float petrol) {
         this.petrol = petrol;
+        System.out.println("Заправка Car: " + name + ", бензином в объеме: " + petrol);
     }
 
     @Override

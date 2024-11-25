@@ -12,13 +12,18 @@ public class Bicycle extends Transport {
     boolean isCanGo(Area area) {
         if (area instanceof Swamp) {
             System.out.println("Машина не может двигаться по " + area);
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
     public boolean run(Area area, int distance) {
         return false;
+    }
+
+    @Override
+    public void setPetrol(float petrol) {
+
     }
 }

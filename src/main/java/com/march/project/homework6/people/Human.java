@@ -12,23 +12,31 @@ public class Human {
         this.currentTransport = null;   // изначально у человека нет транспорта
     }
 
-    // сесть в транспорт
+    // получить в транспорт
     public void getOnTransport(Transport newTransport) {
         if (newTransport == null) {
             throw new IllegalStateException("The transport has not been set yet.");
         }
         currentTransport = newTransport;
-        System.out.println("Сел в " + currentTransport);
+        System.out.println(name + " получил " + currentTransport);
     }
 
     // выйти из транспорта
     public void exitTransport() {
+        System.out.println("Human: " + name + ", отдал машину: " + currentTransport);
         currentTransport = null;
     }
 
     public boolean run(Area area, int distance) {
         System.out.println("Поехали!");
         return currentTransport.run(area, distance);
+    }
+
+    public Transport getCurrentTransport() {
+        if (currentTransport == null) {
+            throw new IllegalStateException("The transport has not been set yet.");
+        }
+        return currentTransport;
     }
 
     @Override
